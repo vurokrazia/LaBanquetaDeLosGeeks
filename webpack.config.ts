@@ -2,6 +2,7 @@ import path from "path";
 import webpack from "webpack";
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const config: webpack.Configuration = {
   entry: "./src/index.tsx",
@@ -20,6 +21,14 @@ const config: webpack.Configuration = {
             ],
           },
         },
+      },
+      {
+        test: /\.(s*)css$/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          "css-loader",
+          // "sass-loader",
+        ],
       },
     ],
   },
@@ -45,6 +54,9 @@ const config: webpack.Configuration = {
       eslint: {
         files: "./src/**/*",
       },
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'assets/[name].css',
     }),
   ],
 };
