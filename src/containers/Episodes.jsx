@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import Episode from '../components/Episodes/Episode.jsx';
 import useEpisodes from '../hooks/useEpisodes'
-
+import AppContext from './../context/AppContext';
 const Episodes = () => {
-  const episodes =  useEpisodes("http://localhost:3007/api/v1/episodes/");
+  const { state } = useContext(AppContext);
+  const { episodes } = state;
   return (
     <>
       <Helmet>
